@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
             target: "https://mrphs.io/",
           },
         ],
-        postUrl: `${process.env.NEXT_PUBLIC_HOST}/stats`,
+        postUrl: `${process.env.NEXT_PUBLIC_HOST}/`,
       };
 
       // Return the frame as HTML

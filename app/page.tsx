@@ -20,7 +20,7 @@ const initialFrame: Frame = {
   buttons: [
     {
       action: "post",
-      label: "Check WL",
+      label: "Check WL Status",
     },
     {
       label: "Mint",
