@@ -12,10 +12,10 @@ import { wl } from "../whitelist";
 import { useState } from "react";
 export async function POST(request: NextRequest) {
   const wlImageUrl = `${process.env.NEXT_PUBLIC_HOST}/wl.jpg`;
-  const notwlImageUrl = `${process.env.NEXT_PUBLIC_HOST}/wl.jpg`;
+  const notwlImageUrl = `${process.env.NEXT_PUBLIC_HOST}/nwl.jpg`;
   const body = await request.json();
   let message = await getFrameMessage(body);
-  const [isWl, setWl] = useState(false);
+  let wlCheck = false;
   if (message.requesterFid) {
     const getUserById = async (id: number | null) => {
       try {
@@ -38,13 +38,14 @@ export async function POST(request: NextRequest) {
     };
     await getUserById(message?.requesterFid).then((res) => {
       const isWl = wl.includes(res);
+      console.log('test');
       if (isWl) {
-        setWl(true);
+        wlCheck = true;
       } else {
-        setWl(false);
+        wlCheck = false;
       }
     });
-    if (isWl) {
+    if (wlCheck) {
       const frame: Frame = {
         image: wlImageUrl,
         version: "vNext",
