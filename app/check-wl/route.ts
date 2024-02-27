@@ -29,7 +29,8 @@ export async function POST(request: NextRequest) {
           }
         );
         let info = await response.json();
-        return info.data.users[0].custody_address;
+        console.log(info);
+        return info?.users[0]?.custody_address;
       } catch (error) {
         console.error("error", error);
       }
