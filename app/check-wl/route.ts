@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   let message = await getFrameMessage(body);
   let wlCheck = false;
+
   if (message.requesterFid) {
     const getUserById = async (id: number | null) => {
       try {
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
     };
     await getUserById(message?.requesterFid).then((res) => {
       const isWl = wl.includes(res.toLowerCase());
-      console.log('test');
+      console.log("test");
       if (isWl) {
         wlCheck = true;
       } else {
@@ -54,7 +55,9 @@ export async function POST(request: NextRequest) {
           {
             label: "Website",
             action: "link",
-            target: "https://mrphs.io/",
+            target: `https://mrphs.io/mint/${btoa(
+              message?.requesterFid.toString()
+            )}`,
           },
         ],
         postUrl: `${process.env.NEXT_PUBLIC_HOST}/`,
