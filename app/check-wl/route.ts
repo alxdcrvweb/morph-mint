@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
           }
         );
         let info = await response.json();
-        return info.data[0].custody_address;
+        return info.data.users[0].custody_address;
       } catch (error) {
         console.error("error", error);
       }
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       // console.log("HIIIII", response);
     };
     await getUserById(message?.requesterFid).then((res) => {
-      const isWl = wl.includes(res);
+      const isWl = wl.includes(res.toLowerCase());
       console.log('test');
       if (isWl) {
         wlCheck = true;
